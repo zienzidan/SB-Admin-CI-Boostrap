@@ -33,6 +33,10 @@ Options -Indexes
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteRule ^([\s\S]*)$ index.php/$1 [L,NC,QSA]
 
+	# Additional rule to serve assets from the 'assets' folder
+	RewriteCond $1 !^(index\.php|assets|robots\.txt)
+	RewriteRule ^(.*)$ /index.php/$1 [L]
+
 	# Ensure Authorization header is passed along
 	RewriteCond %{HTTP:Authorization} .
 	RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
